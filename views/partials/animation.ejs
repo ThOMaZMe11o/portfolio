@@ -1,41 +1,49 @@
-<h1 class="mt-5 text-center text-white fw-semibold lh-sm display-4">Bem-vindo, <span id="texto" class="highlight text-primary">ao meu portfólio</span></h1>
+<h1 class="mt-5 text-center text-white fw-semibold lh-sm display-4">
+  Bem-vindo, <span id="texto" class="highlight text-primary">ao meu portfólio</span>
+</h1>
 
 <script>
-    const frases = ["ao meu portfólio", "meu nome é Thomaz"];
-    let fraseIndex = 0;
-    let charIndex = 0;
-    let apagando = false;
-    const velocidade = 100;      // Velocidade de digitação
-    const pausaEntreFrases = 1500; // Pausa antes de apagar
+  const spanTexto = document.getElementById("texto");
+  const rotaAtual = window.location.pathname;
 
-    const spanTexto = document.getElementById("texto");
+  let frases = [];
 
-    function digitar() {
-      const fraseAtual = frases[fraseIndex];
+  if (rotaAtual === "/projetos") {
+    frases = ["a aba de projetos", "se divirta com meus projetos"];
+  } else {
+    frases = ["ao meu portfólio", "meu nome é Thomaz"];
+  }
 
-      if (!apagando) {
-        spanTexto.textContent = fraseAtual.substring(0, charIndex + 1);
-        charIndex++;
+  let fraseIndex = 0;
+  let charIndex = 0;
+  let apagando = false;
+  const velocidade = 100;
+  const pausaEntreFrases = 1500;
 
-        if (charIndex === fraseAtual.length) {
-          apagando = true;
-          setTimeout(digitar, pausaEntreFrases); // Espera antes de apagar
-          return;
-        }
-      } else {
-        spanTexto.textContent = fraseAtual.substring(0, charIndex - 1);
-        charIndex--;
+  function digitar() {
+    const fraseAtual = frases[fraseIndex];
 
-        if (charIndex === 0) {
-          apagando = false;
-          fraseIndex = (fraseIndex + 1) % frases.length;
-        }
+    if (!apagando) {
+      spanTexto.textContent = fraseAtual.substring(0, charIndex + 1);
+      charIndex++;
+
+      if (charIndex === fraseAtual.length) {
+        apagando = true;
+        setTimeout(digitar, pausaEntreFrases);
+        return;
       }
+    } else {
+      spanTexto.textContent = fraseAtual.substring(0, charIndex - 1);
+      charIndex--;
 
-      setTimeout(digitar, velocidade);
+      if (charIndex === 0) {
+        apagando = false;
+        fraseIndex = (fraseIndex + 1) % frases.length;
+      }
     }
 
-    digitar(); // Inicia a animação
-</script>
+    setTimeout(digitar, velocidade);
+  }
 
-    
+  digitar(); // Inicia a animação
+</script>
