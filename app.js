@@ -7,6 +7,14 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Conexão com o banco de dados MySQL
+const db = mysql.createConnection({
+    host: 'localhost',      
+    user: 'root',
+    password: 'fatec',
+    database: 'meubanco'
+});
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
