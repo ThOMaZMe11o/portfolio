@@ -15,6 +15,14 @@ const db = mysql.createConnection({
     database: 'meubanco'
 });
 
+db.connect((err) => {
+    if (err) {
+        console.error('🔴 Erro ao conectar ao banco de dados:', err);
+        return;
+    }
+    console.log('🟢 Conectado ao banco de dados MySQL');
+});
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
