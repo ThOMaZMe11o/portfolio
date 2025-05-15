@@ -46,6 +46,17 @@ app.get('/projetos', (req, res) => {
     });
 });
 
+// Read por ID
+app.get('/projetos/:id', (req, res) => {
+    db.query('SELECT * FROM projetos WHERE id = ?', [req.params.id], (err, result) => {
+        if (err) return res.status(500).send(err);
+        if (result.length === 0) return res.status(404).send({ 
+            mensagem: '❌ Projeto não encontrado' 
+        });
+        res.send(result[0]);
+    });
+});
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
