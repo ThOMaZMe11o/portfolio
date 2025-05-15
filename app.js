@@ -69,6 +69,16 @@ app.put('/projetos/:id', (req, res) => {
     });
 });
 
+// Delete
+app.delete('/projetos/:id', (req, res) => {
+    db.query('DELETE FROM projetos WHERE id = ?', [req.params.id], (err) => {
+        if (err) return res.status(500).send(err);
+        res.send({ 
+            mensagem: '✅ Projeto excluído com sucesso' 
+        });
+    });
+});
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
