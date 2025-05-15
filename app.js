@@ -23,6 +23,21 @@ db.connect((err) => {
     console.log('🟢 Conectado ao banco de dados MySQL');
 });
 
+// Create
+app.post('/projetos', (req, res) => {
+    const { nome, descricao } = req.body;
+    const sql = 'INSERT INTO projetos (nome, descricao) VALUES (?, ?)';
+
+    db.query(sql, [nome, descricao], (err, result) => {
+        if (err) return res.status(500).send(err);
+        res.send({ 
+            id: result.insertId, 
+            nome, 
+            descricao 
+        });
+    });
+});
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
