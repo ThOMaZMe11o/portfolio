@@ -57,6 +57,18 @@ app.get('/projetos/:id', (req, res) => {
     });
 });
 
+// Update
+app.put('/projetos/:id', (req, res) => {
+    const { nome, descricao } = req.body;
+    const sql = 'UPDATE projetos SET nome = ?, descricao = ? WHERE id = ?';
+    db.query(sql, [nome, descricao, req.params.id], (err) => {
+        if (err) return res.status(500).send(err);
+        res.send({ 
+            mensagem: '✅ Projeto atualizado com sucesso' 
+        });
+    });
+});
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
