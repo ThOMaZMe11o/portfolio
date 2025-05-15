@@ -38,6 +38,14 @@ app.post('/projetos', (req, res) => {
     });
 });
 
+// READ para todos
+app.get('/projetos', (req, res) => {
+    db.query('SELECT * FROM projetos', (err, results) => {
+        if (err) return res.status(500).send(err);
+        res.send(results);
+    });
+});
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
