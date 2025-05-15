@@ -4,6 +4,7 @@ const path = require('path');
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('view engine', 'ejs');
